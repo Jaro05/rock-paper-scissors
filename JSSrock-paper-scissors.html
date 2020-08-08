@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+
+<html>
+
+    <style>
+        #buttons{
+            text-align: center; 
+            position: relative; 
+            top: 70px;
+        }
+
+        .button{
+            width: 150px;
+            height: 50px;
+            font-size: 25px;
+            margin: 10px;
+        }
+
+        #plays{
+            position: absolute;
+            top: 200px;
+            width: 99%;
+            text-align: center;
+        }
+        
+    
+
+        #scoreBoard{
+            position: absolute;
+            top: 400px;
+            width: 99%;
+            text-align: center; 
+        }
+    </style>
+
+
+
+    <head>
+        <title>Rock-Paper-Scissors</title>
+    </head>
+
+    <body>
+        <div id='buttons'>
+            <button class= 'button' id='rock'>Rock</button>
+            <button class= 'button' id='paper'>Paper</button>
+            <button class= 'button' id='scissors'>Scissors</button>
+        </div>
+
+
+        <div id='plays'>
+            <h1 id='playerPlays'></h1>
+            <h1 id='computerPlays'></h1>
+        </div>
+
+
+        <div id=scoreBoard>
+            <h1 id='winsRound'></h1>
+            <h1 id='scoreRound'></h1>
+            <h1 id='scoreEnd'></h1>
+        </div>
+
+    </body>
+    
+
+
+    <script>
+
+        let playerScore=0;
+        let computerScore=0;
+        let counter=0;
+
+        function singleRound(playerSelection){
+            playerPlays.textContent= "Player plays: " + playerSelection;
+            
+            let computerSelection= computerPlay();
+            if (playerSelection=="rock" && computerSelection=="scissors"){
+                playerScore++
+                winsRound.textContent= "You win, rock beats scissors!";
+                scoreRound.textContent= "Player Score: "+ playerScore+ " | Computer Score: "+computerScore;
+            }else if (playerSelection=="rock" && computerSelection=="rock"){
+                winsRound.textContent= "It's a tie!"
+                scoreRound.textContent= "Player Score: "+ playerScore+ " | Computer Score: "+computerScore;
+            }else if (playerSelection=="rock" && computerSelection=="paper"){
+                computerScore++;
+                winsRound.textContent= "You lose, paper beats rock!";
+                scoreRound.textContent= "Player Score: "+ playerScore+ " | Computer Score: "+computerScore;
+            }else if (playerSelection=="paper" && computerSelection=="scissors"){
+                computerScore++;
+                winsRound.textContent= "You lose, scissors beats paper!"
+                scoreRound.textContent= "Player Score: "+ playerScore+ " | Computer Score: "+computerScore
+            }else if (playerSelection=="paper" && computerSelection=="rock"){
+                playerScore++;
+                winsRound.textContent= "You win, paper beats rock!";
+                scoreRound.textContent= "Player Score: "+ playerScore+ " | Computer Score: "+computerScore
+            }else if (playerSelection=="paper" && computerSelection=="paper"){
+                winsRound.textContent= "It's a tie!"
+                scoreRound.textContent= "Player Score: "+ playerScore+ " | Computer Score: "+computerScore
+            }else if (playerSelection=="scissors" && computerSelection=="scissors"){
+                winsRound.textContent= "It's a tie!";
+                scoreRound.textContent= "Player Score: "+ playerScore+ " | Computer Score: "+computerScore;
+            }else if (playerSelection=="scissors" && computerSelection=="rock"){
+                computerScore++;
+                winsRound.textContent= "You lose, rock beats scissors!";
+                scoreRound.textContent= "Player Score: "+ playerScore+ " | Computer Score: "+computerScore;
+            }else if (playerSelection=="scissors" && computerSelection=="paper"){
+                playerScore++;
+                winsRound.textContent= "You win, scissors beats paper!";
+                scoreRound.textContent= "Player Score: "+ playerScore+ " | Computer Score: "+computerScore;
+            }else {{scoreBoard.textContent='null'}}
+
+            counter++;
+            finalVerdict();
+            }
+
+        function finalVerdict(){
+            if (counter>=5){
+                if (playerScore>computerScore){
+                    scoreEnd.textContent=  "Player wins the game!";
+                }else if (playerScore>computerScore){
+                    scoreEnd.textConent= "Computer wins the game!";
+                }else if (playerScore==computerScore){
+                    scoreEnd.textContnent= "The game was a tie!";
+                }}}
+
+        function computerPlay(){
+            let randNumb= Math.floor(Math.random()*3);
+            if (randNumb==0){
+                computerPlays.textContent= "Computer plays: paper"
+                return("paper");
+            }else if(randNumb==1){
+                computerPlays.textContent=("Computer plays: rock")
+                return("rock");
+            }else if(randNumb==2){
+                computerPlays.textContent=("Computer plays: scissors")
+                return("scissors");}
+        }
+
+
+
+
+        let rock=document.querySelector('#rock')
+        rock.addEventListener('click', () => singleRound('rock') );
+
+        let paper=document.querySelector('#paper')
+        paper.addEventListener('click', () => singleRound('paper'))
+
+        let scissors=document.querySelector('#scissors')
+        scissors.addEventListener('click', () => singleRound('scissors'))
+
+      
+
+    </script>
+</html>
